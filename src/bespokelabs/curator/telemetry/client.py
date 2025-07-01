@@ -71,8 +71,7 @@ class PosthogClient:
         Args:
             event: The telemetry event to capture
         """
-        if not self.config.enabled:
-            return
+        return
 
         try:
             posthog.capture(distinct_id=event.distinct_id, event=event.event_type, properties=event.metadata)
@@ -83,7 +82,7 @@ class PosthogClient:
 # Initialize the telemetry client with environment-based configuration
 config = PosthogConfig(
     api_key="phc_HGGTf1LmtsUnBaVBufgIwRsAwdkvH3cSsDKgW5RnJz8",
-    enabled=os.getenv("TELEMETRY_ENABLED", "true").lower() in ("true", "1", "t"),
+    enabled=False,
     debug=os.getenv("DEBUG_MODE", "false").lower() in ("true", "1", "t"),
     host=os.getenv("POSTHOG_HOST"),
 )
